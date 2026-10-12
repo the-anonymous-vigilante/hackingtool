@@ -74,10 +74,10 @@ PARSERS = {"subfinder": parse_subfinder, "httpx": parse_httpx, "nuclei": parse_n
 
 def save_findings(path: Path, findings: list[Finding]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps([asdict(f) for f in findings], indent=2))
+    path.write_text(json.dumps([asdict(f) for f in findings], indent=2), encoding="utf-8")
 
 
 def load_findings(path: Path) -> list[Finding]:
     if not path.exists():
         return []
-    return [Finding(**d) for d in json.loads(path.read_text())]
+    return [Finding(**d) for d in json.loads(path.read_text(encoding="utf-8"))]

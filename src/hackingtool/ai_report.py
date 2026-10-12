@@ -121,7 +121,7 @@ def draft_report(e: Engagement) -> Path | None:
     out = (f"# Engagement: {e.name} — Report (AI DRAFT)\n\n{banner}\n"
            f"{narrative}\n\n---\n\n## Appendix — Verified findings\n\n"
            f"{render_report(e)}\n")
-    e.report_draft_file.write_text(out)
+    e.report_draft_file.write_text(out, encoding="utf-8")
     return e.report_draft_file
 
 

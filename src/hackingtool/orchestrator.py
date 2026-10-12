@@ -15,7 +15,7 @@ STEP_TIMEOUT = 1800  # 30 min per step; ponytail: bump if a step legitimately ru
 
 
 def load_pipeline(name: str) -> dict:
-    return yaml.safe_load((PIPELINES_DIR / f"{name}.yaml").read_text())
+    return yaml.safe_load((PIPELINES_DIR / f"{name}.yaml").read_text(encoding="utf-8"))
 
 
 def _host_of(line: str) -> str:
@@ -50,7 +50,7 @@ def run_pipeline(e: Engagement, pipeline_name: str = "recon") -> list[findings_m
             e.log(f"error {tool}: {exc}")
             forward = []
             continue
-        (e.workspace / step["output"]).write_text(raw)
+        (e.workspace / step["output"]).write_text(raw, encoding="utf-8")
         parsed, forward = findings_mod.PARSERS[step["parser"]](raw, ts)
         if e.scope_out:
             kept = []

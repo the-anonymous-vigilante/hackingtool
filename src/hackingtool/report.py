@@ -49,5 +49,5 @@ def render_report(e: Engagement) -> str:
 
 
 def generate_report(e: Engagement) -> Path:
-    e.report_file.write_text(render_report(e))
+    e.report_file.write_text(render_report(e), encoding="utf-8")
     return e.report_file

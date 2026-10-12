@@ -68,7 +68,7 @@ class Engagement:
     def save(self) -> None:
         self.workspace.mkdir(parents=True, exist_ok=True)
         (self.workspace / "engagement.json").write_text(
-            json.dumps(asdict(self), indent=2))
+            json.dumps(asdict(self), indent=2), encoding="utf-8")
 
 
 def load(name: str) -> Engagement | None:
